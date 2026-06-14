@@ -1,0 +1,24 @@
+                FedGuard Architecture
+
+      Client 1                          Client 2
+  (Local Scam Data)                (Local Scam Data)
+
+           \                            /
+            \                          /
+             \                        /
+              \                      /
+                 FedAvg Server
+              (Flower Framework)
+
+                       |
+                       |
+                       V
+
+                 Global Model
+             (DistilBERT Classifier)
+
+                       |
+                       |
+                       V
+
+              Scam Message Detection

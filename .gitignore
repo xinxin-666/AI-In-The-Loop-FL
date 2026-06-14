@@ -1,0 +1,15 @@
+results/
+final_results/
+deliver_to_A/
+deliver_to_B/
+
+*.zip
+*.safetensors
+*.png
+
+**pycache**/
+*.pyc
+
+backup/
+backup_real_train/
+final_backup/

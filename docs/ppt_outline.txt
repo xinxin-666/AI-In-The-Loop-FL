@@ -1,0 +1,51 @@
+FedGuard
+Federated Learning Based Scam Message Detection System
+
+--------------------------------
+
+1. Project Background
+- Scam messages are increasing
+- Privacy concerns in centralized training
+
+2. Problem Statement
+- Traditional methods require centralized data
+- User privacy may be exposed
+
+3. Proposed Solution
+- Federated Learning
+- DistilBERT
+- Flower Framework
+
+4. System Architecture
+- Client 1
+- Client 2
+- Flower Server
+- FedAvg
+
+5. Dataset
+- Scam messages
+- Normal messages
+- Data distribution
+
+6. Model Design
+- DistilBERT
+- Text Classification
+
+7. Training Process
+- Local Training
+- Parameter Aggregation
+
+8. Experimental Results
+- Accuracy: 95.83%
+- Precision: 92.31%
+- Recall: 100%
+- F1: 96%
+
+9. Web Demonstration
+- Streamlit Interface
+- Real-time Detection
+
+10. Conclusion
+- Privacy Protection
+- Effective Scam Detection
+- Future Work

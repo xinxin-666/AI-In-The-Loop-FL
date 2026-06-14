@@ -1,0 +1,19 @@
+Federated Learning Result
+
+Accuracy : 0.9375
+Precision: 0.8889
+Recall   : 1.0000
+F1-score : 0.9412
+
+Framework:
+Flower + FedAvg + DistilBERT
+
+Clients:
+Client1
+Client2
+
+Rounds:
+10
+
+Differential Privacy:
+Opacus Installed Successfully
