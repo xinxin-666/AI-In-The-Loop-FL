@@ -199,6 +199,14 @@ Student Xinxin:
 \* Federated learning debugging
 
 \* Git integration and deployment
+## Screenshots
 
+### Client Training
+
+![client](final_submit/screenshots/client_train.png)
+
+### Federated Learning Result
+
+![result](final_submit/screenshots/federated_result.png)
 
 
