@@ -1,4 +1,8 @@
-\# Federated Scam Detection System
+\# AI-In-The-Loop-FL
+
+
+
+Federated Learning based scam message detection system using BERT with Differential Privacy.
 
 
 
@@ -6,95 +10,195 @@
 
 
 
-This project implements a scam message detection system using DistilBERT and Federated Learning.
+This project implements a federated learning framework for scam message detection using BERT and Flower. Multiple clients collaboratively train a global model without sharing raw data.
 
 
 
-\## Features
+Features:
 
 
 
-\* Scam Message Detection
+\* BERT text classification
 
-\* DistilBERT Classification
+\* Federated Learning (Flower)
 
-\* Flower Federated Learning Framework
+\* Differential Privacy (Opacus)
 
-\* Privacy-Preserving Training
+\* Scam message detection
 
-
-
-\## Dataset
+\* Distributed client-server architecture
 
 
 
-Current dataset:
+\---
 
 
 
-\* Scam messages
-
-\* Normal messages
+\## Project Structure
 
 
 
-Stored in:
+```text
+
+AI-In-The-Loop-FL
+
+│
+
+├── client1\_bert.py
+
+├── client2\_bert.py
+
+├── server.py
+
+├── model/
+
+│   ├── train\_bert.py
+
+│   ├── evaluate.py
+
+│   └── predict.py
+
+│
+
+├── data/
+
+│   ├── scam\_messages.csv
+
+│   ├── client1/
+
+│   └── client2/
+
+│
+
+├── results/
+
+├── docs/
+
+└── README.md
+
+```
 
 
 
-data/scam\_messages.csv
+\## Environment Setup
 
 
 
-\## Training
+Install dependencies:
 
 
 
-Run:
+```bash
+
+pip install -r requirements.txt
+
+```
 
 
 
-python model/train\_bert.py
+\## Run Steps
 
 
 
-\## Prediction
+Start server:
 
 
 
-Run:
-
-
-
-python model/predict.py
-
-
-
-\## Federated Learning
-
-
-
-Server:
-
-
+```bash
 
 python server.py
 
-
-
-Client 1:
-
-
-
-python client1.py
+```
 
 
 
-Client 2:
+Open another terminal:
 
 
 
-python client2.py
+```bash
+
+python client1\_bert.py
+
+```
+
+
+
+Open another terminal:
+
+
+
+```bash
+
+python client2\_bert.py
+
+```
+
+
+
+\## Training Results
+
+
+
+Federated learning training completed successfully.
+
+
+
+Rounds: 10
+
+
+
+Loss:
+
+
+
+\* Round 1: 0.10
+
+\* Round 5: 0.10
+
+\* Round 10: 0.10
+
+
+
+\## Team Contributions
+
+
+
+Student A:
+
+
+
+\* Data preprocessing
+
+\* Dataset cleaning
+
+
+
+Student B:
+
+
+
+\* Model design
+
+
+
+Student C:
+
+
+
+\* Federated learning implementation
+
+
+
+Student Xinxin:
+
+
+
+\* BERT training modification
+
+\* Federated learning debugging
+
+\* Git integration and deployment
 
 
 
