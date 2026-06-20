@@ -41,40 +41,20 @@ Features:
 ```text
 
 AI-In-The-Loop-FL
-
-鈹�
-
-鈹溾攢鈹€ client1\_bert.py
-
-鈹溾攢鈹€ client2\_bert.py
-
-鈹溾攢鈹€ server.py
-
-鈹溾攢鈹€ model/
-
-鈹�   鈹溾攢鈹€ train\_bert.py
-
-鈹�   鈹溾攢鈹€ evaluate.py
-
-鈹�   鈹斺攢鈹€ predict.py
-
-鈹�
-
-鈹溾攢鈹€ data/
-
-鈹�   鈹溾攢鈹€ scam\_messages.csv
-
-鈹�   鈹溾攢鈹€ client1/
-
-鈹�   鈹斺攢鈹€ client2/
-
-鈹�
-
-鈹溾攢鈹€ results/
-
-鈹溾攢鈹€ docs/
-
-鈹斺攢鈹€ README.md
+├── client1_bert.py
+├── client2_bert.py
+├── server.py
+├── model/
+│   ├── train_bert.py
+│   ├── evaluate.py
+│   └── predict.py
+├── data/
+│   ├── scam_messages.csv
+│   ├── client1/
+│   └── client2/
+├── results/
+├── docs/
+└── README.md
 
 ```
 
