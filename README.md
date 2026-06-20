@@ -42,39 +42,39 @@ Features:
 
 AI-In-The-Loop-FL
 
-│
+鈹�
 
-├── client1\_bert.py
+鈹溾攢鈹€ client1\_bert.py
 
-├── client2\_bert.py
+鈹溾攢鈹€ client2\_bert.py
 
-├── server.py
+鈹溾攢鈹€ server.py
 
-├── model/
+鈹溾攢鈹€ model/
 
-│   ├── train\_bert.py
+鈹�   鈹溾攢鈹€ train\_bert.py
 
-│   ├── evaluate.py
+鈹�   鈹溾攢鈹€ evaluate.py
 
-│   └── predict.py
+鈹�   鈹斺攢鈹€ predict.py
 
-│
+鈹�
 
-├── data/
+鈹溾攢鈹€ data/
 
-│   ├── scam\_messages.csv
+鈹�   鈹溾攢鈹€ scam\_messages.csv
 
-│   ├── client1/
+鈹�   鈹溾攢鈹€ client1/
 
-│   └── client2/
+鈹�   鈹斺攢鈹€ client2/
 
-│
+鈹�
 
-├── results/
+鈹溾攢鈹€ results/
 
-├── docs/
+鈹溾攢鈹€ docs/
 
-└── README.md
+鈹斺攢鈹€ README.md
 
 ```
 
