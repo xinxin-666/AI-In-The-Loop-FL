@@ -1,193 +1,298 @@
-\# AI-In-The-Loop-FL
+# AI-In-The-Loop-FL
 
+AI-In-The-Loop-FL is a federated learning based scam message detection system using BERT for text classification. The project combines privacy-preserving distributed learning and AI-based text analysis to identify fraudulent messages while keeping user data localized.
 
+---
 
-Federated Learning based scam message detection system using BERT with Differential Privacy.
+# Project Overview
 
+This project simulates a federated learning environment for scam detection. Multiple clients train models locally on their own datasets and only exchange model parameters with the central server.
 
+Main features:
 
-\## Project Overview
+* Federated Learning using Flower
+* BERT-based text classification
+* Distributed training with multiple clients
+* Privacy-preserving architecture
+* Scam message detection
+* Non-IID data distribution simulation
 
+---
 
+# System Architecture
 
-This project implements a federated learning framework for scam message detection using BERT and Flower. Multiple clients collaboratively train a global model without sharing raw data.
+Client devices:
 
+* Client1
+* Client2
 
+Central server:
 
-Features:
+* Flower Federated Server
 
+Model:
 
+* BERT (bert-base-uncased)
 
-\* BERT text classification
+Training process:
 
-\* Federated Learning (Flower)
+1. Server initializes global model
+2. Clients receive parameters
+3. Clients train locally
+4. Parameters sent back to server
+5. Server aggregates using FedAvg
+6. Repeat for multiple rounds
 
-\* Differential Privacy (Opacus)
+---
 
-\* Scam message detection
+# Dataset
 
-\* Distributed client-server architecture
+The project uses manually collected and constructed text samples.
 
+Total dataset:
 
+* Total samples: 48
+* Scam messages: 24
+* Normal messages: 24
 
-\---
+Client distribution:
 
+Client1:
 
+* Total: 24
+* Scam: 20
+* Normal: 4
 
-\## Project Structure
+Client2:
 
+* Total: 24
+* Scam: 4
+* Normal: 20
 
+Dataset is intentionally distributed in a Non-IID manner to simulate realistic federated learning environments where users possess different local data distributions.
+
+---
+
+# Environment
+
+Required packages:
+
+```bash
+pip install torch
+pip install transformers
+pip install flwr
+pip install pandas
+pip install opacus
+```
+
+Or:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Project Structure
 
 ```text
-
-AI-In-The-Loop-FL
+AI-In-The-Loop-FL/
+│
 ├── client1_bert.py
 ├── client2_bert.py
 ├── server.py
 ├── model/
-│   ├── train_bert.py
-│   ├── evaluate.py
 │   └── predict.py
+│
 ├── data/
-│   ├── scam_messages.csv
 │   ├── client1/
+│   │    └── scam_messages.csv
+│   │
 │   └── client2/
+│        └── scam_messages.csv
+│
 ├── results/
-├── docs/
+│   └── scam_model/
+│
 └── README.md
-
-
 ```
 
+---
 
-
-\## Environment Setup
-
-
-
-Install dependencies:
-
-
-
-```bash
-
-pip install -r requirements.txt
-
-```
-
-
-
-\## Run Steps
-
-
+# Training
 
 Start server:
 
-
-
 ```bash
-
 python server.py
-
 ```
 
+Open separate terminals and start clients:
 
-
-Open another terminal:
-
-
+Client1:
 
 ```bash
-
-python client1\_bert.py
-
+python client1_bert.py
 ```
 
-
-
-Open another terminal:
-
-
+Client2:
 
 ```bash
-
-python client2\_bert.py
-
+python client2_bert.py
 ```
 
+Training configuration:
 
+* Federated rounds: 10
+* Optimizer: AdamW
+* Learning rate: 2e-5
+* Model: BERT-base
 
-\## Training Results
+---
 
+# Model Performance
 
+Training loss:
 
-Federated learning training completed successfully.
+| Round | Loss       |
+| ----- | ---------- |
+| 1     | 0.2783     |
+| 2     | 0.0780     |
+| 3     | 0.0176     |
+| 4     | 0.1526     |
+| 5     | 0.000025   |
+| 6     | 0.0000049  |
+| 7     | 0.0000018  |
+| 8     | 0.00000089 |
+| 9     | 0.00000036 |
+| 10    | 0.00000018 |
 
+The model converged successfully after federated training.
 
+---
 
-Rounds: 10
+# Prediction Examples
 
+Normal messages:
 
+Input:
 
-Loss:
+```text
+Hello, how are you?
+```
 
+Output:
 
+```text
+NOT SCAM
+Confidence: 100%
+```
 
-\* Round 1: 0.10
+Input:
 
-\* Round 5: 0.10
+```text
+Let's meet tomorrow.
+```
 
-\* Round 10: 0.10
+Output:
 
+```text
+NOT SCAM
+Confidence: 100%
+```
 
+Scam messages:
 
-\## Team Contributions
+Input:
 
+```text
+Your account has been locked.
+```
 
+Output:
 
-Student A:
+```text
+SCAM
+Confidence: 100%
+```
 
+Input:
 
+```text
+Verify your password now.
+```
 
-\* Data preprocessing
+Output:
 
-\* Dataset cleaning
+```text
+SCAM
+Confidence: 100%
+```
 
+---
 
+# Inference
 
-Student B:
+Run prediction:
 
+```bash
+python model/predict.py
+```
 
+Example:
 
-\* Model design
+```text
+Enter message:
+Your account has been locked.
+```
 
+Output:
 
+```text
+SCAM (100%)
+```
 
-Student C:
+Average runtime:
 
+* Approximately 5.32 seconds
 
+Note:
 
-\* Federated learning implementation
+Current runtime includes:
 
+* Python startup
+* Model loading
+* Prediction
 
+Actual inference time after model loading is significantly lower.
 
-Student Xinxin:
+---
 
+# Model Files
 
+Trained model weights are stored locally:
 
-\* BERT training modification
+```text
+results/scam_model/
+```
 
-\* Federated learning debugging
+Large model files are not uploaded to GitHub because of repository file-size limitations.
 
-\* Git integration and deployment
-## Screenshots
+Users can retrain locally to generate model weights.
 
-### Client Training
+---
 
-![client](final_submit/screenshots/client_train.png)
+# Future Improvements
 
-### Federated Learning Result
+* Increase dataset size
+* Add more clients
+* Introduce stronger differential privacy mechanisms
+* Improve model generalization
+* Deploy as Web service
+* Real-time scam detection support
 
-![result](final_submit/screenshots/federated_result.png)
+---
 
+# Authors
 
+AI-In-The-Loop-FL Team
