@@ -8,6 +8,8 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
 
+print("Loading model from: results/scam_model")
+
 # 输入消息
 text = input("Enter message: ")
 
@@ -32,6 +34,13 @@ prediction = torch.argmax(outputs.logits, dim=1).item()
 # 概率
 probabilities = torch.softmax(outputs.logits, dim=1)
 confidence = probabilities[0][prediction].item() * 100
+
+print("raw logits:", outputs.logits)
+
+probabilities = torch.softmax(outputs.logits, dim=1)
+print("probabilities:", probabilities)
+
+print("prediction:", prediction)
 
 # 输出
 if prediction == 1:

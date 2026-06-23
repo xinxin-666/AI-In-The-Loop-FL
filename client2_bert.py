@@ -17,23 +17,25 @@ model = AutoModelForSequenceClassification.from_pretrained(
     MODEL_PATH
 )
 
-df = pd.read_csv(
-    "data/client2/scam_messages.csv"
-)
 
 class BertClient(fl.client.NumPyClient):
+
+    def __init__(self):
+
+        self.model = model
+        self.tokenizer = tokenizer
 
     def get_parameters(self, config):
 
         return [
             val.cpu().numpy()
-            for _, val in model.state_dict().items()
+            for _, val in self.model.state_dict().items()
         ]
 
     def set_parameters(self, parameters):
 
         params_dict = zip(
-            model.state_dict().keys(),
+            self.model.state_dict().keys(),
             parameters
         )
 
@@ -42,7 +44,7 @@ class BertClient(fl.client.NumPyClient):
             for k, v in params_dict
         }
 
-        model.load_state_dict(
+        self.model.load_state_dict(
             state_dict,
             strict=True
         )
@@ -54,31 +56,36 @@ class BertClient(fl.client.NumPyClient):
         self.set_parameters(parameters)
 
         optimizer = torch.optim.AdamW(
-            model.parameters(),
+            self.model.parameters(),
             lr=2e-5
         )
 
-        model.train()
+        self.model.train()
 
-        for epoch in range(3):
+        df = pd.read_csv("data/client2/scam_messages.csv")
 
-            print(f"\nEpoch {epoch+1}/3")
+        df = df.sample(frac=1).reset_index(drop=True)
+
+        for epoch in range(1):
+
+            print(f"\nEpoch {epoch+1}/1")
 
             for i, row in df.iterrows():
 
                 text = row["text"]
-                label = int(row["label"])
+                label = torch.tensor([int(row["label"])])
 
-                inputs = tokenizer(
+                inputs = self.tokenizer(
                     text,
                     return_tensors="pt",
                     truncation=True,
                     padding=True
                 )
 
-                outputs = model(
+                outputs = self.model(
+
                     **inputs,
-                    labels=torch.tensor([label])
+                    labels=label
                 )
 
                 loss = outputs.loss
@@ -101,17 +108,48 @@ class BertClient(fl.client.NumPyClient):
 
     def evaluate(self, parameters, config):
 
-        self.set_parameters(parameters)
+      self.set_parameters(parameters)
 
-        return (
-            0.1,
-            len(df),
-            {"accuracy": 0.95}
-        )
+      df = pd.read_csv("data/client2/scam_messages.csv")
 
-client = BertClient()
+      self.model.eval()
 
-fl.client.start_numpy_client(
-    server_address="127.0.0.1:8080",
-    client=client
-)
+      total_loss = 0
+
+      with torch.no_grad():
+
+          for _, row in df.iterrows():
+
+              text = row["text"]
+              label = int(row["label"])
+
+              inputs = self.tokenizer(
+                  text,
+                  return_tensors="pt",
+                  truncation=True,
+                  padding=True
+              )
+
+              outputs = self.model(
+                  **inputs,
+                  labels=torch.tensor([label])
+              )
+
+              total_loss += outputs.loss.item()
+
+      avg_loss = total_loss / len(df)
+
+      return (
+          avg_loss,
+          len(df),
+          {}
+      )
+if __name__ == "__main__":
+
+
+    client = BertClient()
+
+    fl.client.start_numpy_client(
+        server_address="127.0.0.1:8080",
+        client=client
+    )
